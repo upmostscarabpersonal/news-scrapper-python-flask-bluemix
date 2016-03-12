@@ -1,0 +1,4 @@
+---
+applications:
+- name: newsscrapper
+  memory: 128M
