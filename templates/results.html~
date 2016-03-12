@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Result for {{keyword}} from {{URL}}</title>
+    </head>
+    <body>
+        <h2>Results for {{keyword}} from {{URL}}</h2>
+        <ul>
+            {% for u, r in result %}
+            <li>{{ r }} : <a href={{u}}>{{u}}</a> </li>
+            {% endfor %}
+        </ul>
+        <form  action='/back>
+            <input type='submit' value='Back''></button>
+        </from>
+    </body>
+</html>

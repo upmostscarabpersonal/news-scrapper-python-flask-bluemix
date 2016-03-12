@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<style type="text/css">    
+    div {
+    	width: 100px;
+    	height: 100px;
+
+    	position: absolute;
+    	top:0;
+    	bottom: 0;
+    	left: 0;
+    	right: 0;
+	
+    	margin: auto;
+    }
+</style>
+<html>
+    <div>
+        <h2>Scrape news by keyword</h2>
+        <form action="/scrape" method="post">
+            <input type='text' name='URL' value='http://www.foxnews.com'>
+            <input type='text' name='keyword' value='Trump'>
+            <input type="submit" value="Scrape"></input>
+        </form>
+    </div>
+</html>
