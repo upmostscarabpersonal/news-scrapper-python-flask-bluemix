@@ -8,8 +8,8 @@ app = Flask(__name__)
 def scrape_site(URL, keyword):
     response = requests.get(URL)
     soup = bs4.BeautifulSoup(response.text)
-    results = [ [a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=' + URL + ']') if keyword in a.contents[0] ]
-    results = results + [ [URL + a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=/]')  if keyword in a.contents[0] ]
+    results = [ [a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=' + URL + ']') if keyword.lower() in str(a.contents[0]).lower() ]
+    results = results + [ [URL + a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=/]')  if keyword.lower() in str(a.contents[0]).lower() ]
     b_set = set(tuple(x) for x in results)
     b = [ list(x) for x in b_set ]
     b.sort(key = lambda x: results.index(x) )
