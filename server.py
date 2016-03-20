@@ -8,8 +8,13 @@ app = Flask(__name__)
 def scrape_site(URL, keyword):
     response = requests.get(URL)
     soup = bs4.BeautifulSoup(response.text)
-    results = [ [a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=' + URL + ']') if keyword.lower() in str(a.contents[0]).lower() ]
-    results = results + [ [URL + a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=/]')  if keyword.lower() in str(a.contents[0]).lower() ]
+    ##results = [ [a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=' + URL + ']') if keyword.lower() in str(a.contents[0]).lower() ]
+    results = [ [a.attrs.get('href'), a.get_text()] for a in soup.select('a[href^=' + URL + ']') if keyword.lower() in str(a.contents[0]).lower() ]
+    print(soup.find_all("h3")[0].parent.attrs.get('href'))
+    results = results = [ [a.parent.attrs.get('href'), a.get_text()] for a in soup.find_all('h3') if keyword.lower() in str(a.get_text()).lower()]
+    ##results = resullt + [ ["", a] for a in soup.find_all('h3') ]
+    ##results = results + [ [URL + a.attrs.get('href'), a.contents[0]] for a in soup.select('a[href^=/]')  if keyword.lower() in str(a.contents[0]).lower() ]
+    results = results + [ [URL + a.attrs.get('href'), a.get_text()] for a in soup.select('a[href^=/]')  if keyword.lower() in str(a.contents[0]).lower() ]
     b_set = set(tuple(x) for x in results)
     b = [ list(x) for x in b_set ]
     b.sort(key = lambda x: results.index(x) )
